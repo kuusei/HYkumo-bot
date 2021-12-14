@@ -19,7 +19,7 @@ nonebot-plugin-test = "^0.3.0"
 nb-cli = "^0.5.1"
 
 [nonebot.plugins]
-plugins = ["nonebot_plugin_status","nonebot_plugin_web"]
+plugins = ["nonebot_plugin_test","nonebot_plugin_status","nonebot_plugin_web"]
 plugin_dirs = ["src/plugins"]
 
 [build-system]

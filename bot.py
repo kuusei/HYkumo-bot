@@ -22,7 +22,9 @@ app = nonebot.get_asgi()
 driver = nonebot.get_driver()
 driver.register_adapter("cqhttp", CQHTTPBot)
 
+# 加载内建插件 /say /echo
 nonebot.load_builtin_plugins()
+# 加载外部插件
 nonebot.load_from_toml("pyproject.toml")
 
 if __name__ == "__main__":
