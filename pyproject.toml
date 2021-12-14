@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "HYkomo-bot"
+version = "0.1.0"
+description = "HYkomo-bot"
+authors = []
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8.10"
+nonebot2 = "^2.0.0.a16"
+nonebot-adapter-cqhttp = "^2.0.0-alpha.16"
+# 服务器状态查看 使用 /状态 或者戳一戳
+nonebot-plugin-status = "^0.2.2"
+# 网页端聊天记录查看器
+nonebot-plugin-web = "^0.1.4"
+
+[tool.poetry.dev-dependencies]
+nonebot-plugin-test = "^0.3.0"
+nb-cli = "^0.5.1"
+
+[nonebot.plugins]
+plugins = ["nonebot_plugin_status","nonebot_plugin_web"]
+plugin_dirs = ["src/plugins"]
+
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
