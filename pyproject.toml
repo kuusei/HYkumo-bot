@@ -13,13 +13,15 @@ nonebot-adapter-cqhttp = "^2.0.0-alpha.16"
 nonebot-plugin-status = "^0.2.2"
 # 网页端聊天记录查看器
 nonebot-plugin-web = "^0.1.4"
+nonebot-plugin-localstore = "^0.1.0"
+black = "^21.12b0"
 
 [tool.poetry.dev-dependencies]
 nonebot-plugin-test = "^0.3.0"
 nb-cli = "^0.5.1"
 
 [nonebot.plugins]
-plugins = ["nonebot_plugin_test","nonebot_plugin_status","nonebot_plugin_web"]
+plugins = ["nonebot_plugin_test","nonebot_plugin_status","nonebot_plugin_web", "nonebot_plugin_localstore"]
 plugin_dirs = ["src/plugins"]
 
 [build-system]
