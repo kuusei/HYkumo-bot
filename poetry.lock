@@ -2,7 +2,7 @@
 name = "aiofiles"
 version = "0.7.0"
 description = "File support for asyncio."
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6,<4.0"
 
@@ -345,6 +345,18 @@ python-versions = ">=3.7.3,<4.0.0"
 [package.dependencies]
 httpx = ">=0.18.0,<1.0.0"
 nonebot2 = ">=2.0.0-alpha.14,<3.0.0"
+
+[[package]]
+name = "nonebot-plugin-filehost"
+version = "0.1.0"
+description = "A HTTP static file hosting plugin for NoneBot2, which provides an graceful solution for cross-machine file transfer."
+category = "main"
+optional = false
+python-versions = ">=3.7.3,<4.0.0"
+
+[package.dependencies]
+aiofiles = ">=0.7.0,<0.8.0"
+nonebot2 = ">=2.0.0-alpha.15,<3.0.0"
 
 [[package]]
 name = "nonebot-plugin-localstore"
@@ -753,7 +765,7 @@ dev = ["pytest (>=4.6.2)", "black (>=19.3b0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8.10"
-content-hash = "a7a8afa3274db528cf63eb04d77f757b18f33d155498c1f440471c7106285c4f"
+content-hash = "5911f9eb8d6358fe217d7a0f5eb75f19c2005540295645c2d5781665be936f9c"
 
 [metadata.files]
 aiofiles = [
@@ -947,6 +959,10 @@ nb-cli = [
 nonebot-adapter-cqhttp = [
     {file = "nonebot-adapter-cqhttp-2.0.0a16.tar.gz", hash = "sha256:9de270291b98c41a45e5b629c02f16e3b25cafb3867b8161851f49c84145d8aa"},
     {file = "nonebot_adapter_cqhttp-2.0.0a16-py3-none-any.whl", hash = "sha256:831747c55c9c1a660215225f84784a4ca275a84bffa8d1312524367066b68bbe"},
+]
+nonebot-plugin-filehost = [
+    {file = "nonebot-plugin-filehost-0.1.0.tar.gz", hash = "sha256:80a6847606a51b9d5cfff482925d378cc0d22cf94edd7814ffd42b9c2f1b20e5"},
+    {file = "nonebot_plugin_filehost-0.1.0-py3-none-any.whl", hash = "sha256:1d1619aa3d2b9220d58ff9db500010f0c491770404eb79a36531e981860eb0e8"},
 ]
 nonebot-plugin-localstore = [
     {file = "nonebot-plugin-localstore-0.1.0.tar.gz", hash = "sha256:6d264cf8adcc4a470b496a78384eafd6ffd13bb8b7e14125e38e641748d2ee79"},

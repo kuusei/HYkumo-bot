@@ -1,11 +1,13 @@
+import json
 import re
 
 from nonebot import get_driver
 from nonebot.adapters import Bot, Event
 from nonebot.adapters.cqhttp import Bot, Event
-from nonebot.plugin import on_command
+from nonebot.plugin import on_command, require
 from nonebot.rule import to_me
 from nonebot.typing import T_State
+from nonebot.utils import DataclassEncoder
 
 from .config import Config
 from .data_source import get_RJlist, get_txt, write_txt
@@ -70,8 +72,15 @@ async def handle_method(bot: Bot, event: Event, state: T_State):
 @asmr_get.got("filename", prompt="请输入排除器/交换人")
 async def handle_method(bot: Bot, event: Event, state: T_State):
     res = await get_txt(state["method"], state["filename"])
-    res = "\n".join(str(i) for i in res)
-    await asmr_get.finish(res)
+    if res == []:
+        await asmr_get.finish("列表不存在")
+    
+    store = require("nonebot_plugin_localstore")
+    if state["method"] in ["排除", "我的", "交换"]:
+        await bot.upload_group_file(group_id=event.group_id, name="列表.txt", file=store.get_data_file("asmr", f"{state['filename']}.list"))
+    else:
+        await bot.upload_group_file(group_id=event.group_id, name="列表.txt", file=store.get_data_file("asmr\expect\\", f"{state['filename']}.list"))
+    await asmr_get.finish(f"获取成功")
 
 
 # !筛选列表
@@ -96,7 +105,7 @@ async def handle_method(bot: Bot, event: Event, state: T_State):
     # 使用筛选器
     [code, MyFilterList] = await get_RJlist(MyList, RJfilters)
     if code != 200:
-        await asmr_filter.finish(f"{MyFilterList}")
+        await asmr_filter.finish(f"失败{MyFilterList}")
     res = "\n".join(str(i) for i in MyFilterList)
     await asmr_filter.finish(f"筛选后的列表为\n{res}")
 
@@ -127,10 +136,12 @@ async def handle_method(bot: Bot, event: Event, state: T_State):
     HisFilterList = [y for y in HisFilterList if y not in CommonList]
     MyFilterList = [y for y in MyFilterList if y not in CommonList]
 
-    res = "\n".join(str(i) for i in HisFilterList)
-    await asmr_filter.send(f"交换人独有列表为\n{res}")
+    store = require("nonebot_plugin_localstore")
 
-    res = "\n".join(str(i) for i in MyFilterList)
-    await asmr_filter.send(f"我独有列表为\n{res}")
+    await write_txt("临时 -f", "HisFilterList", ["列表获取时间"] + HisFilterList)
+    await bot.upload_group_file(group_id=event.group_id, name="交换人独有列表.txt", file=store.get_data_file("asmr\\tmp\\", "HisFilterList.list"))
 
+    await write_txt("临时 -f", "MyFilterList", ["列表获取时间"] + MyFilterList)
+    await bot.upload_group_file(group_id=event.group_id, name="我的独有列表.txt", file=store.get_data_file("asmr\\tmp\\", "MyFilterList.list"))
+    
     await asmr_filter.send(f"对比完成")

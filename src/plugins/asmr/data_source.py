@@ -11,7 +11,7 @@ plugin_data_dir = store.get_data_dir("asmr")
 plugin_data_file = store.get_data_file("asmr", "my.list")
 
 # 模式映射文件位置
-method_dict = {"排除": "\expect", "排除 -f": "\expect", "我的": "", "交换": ""}
+method_dict = {"排除": "\expect", "排除 -f": "\expect", "我的": "", "交换": "", "临时 -f": "\\tmp"}
 
 # 获取筛选后的列表
 async def get_RJlist(myList: list, RJfilters: list):
@@ -73,7 +73,7 @@ async def write_txt(method: str, filename: str, RJlist: list):
     # 判断权限
     rights = {False: "a+", True: "w+"}
     enforce = False
-    if (method[-2:-1]) == "-f":
+    if (method[-2:]) == "-f":
         enforce = True
 
     # 获取已有列表
