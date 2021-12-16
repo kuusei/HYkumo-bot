@@ -11,7 +11,7 @@ from nonebot.log import logger, default_format
 logger.add("error.log",
            rotation="00:00",
            diagnose=False,
-           level="ERROR",
+           level="INFO",
            format=default_format)
 
 nonebot.init()
